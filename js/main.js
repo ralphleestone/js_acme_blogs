@@ -49,6 +49,8 @@ function createSelectOptions(users){
         
         // assings options text content to user name
         option.textContent = user.name;
+        
+        // return option
         return option;
     });
 
@@ -614,7 +616,7 @@ function toggleComments(event, postId){
     if(event || !postId){return undefined;}
     
     // asigns event target listener to true
-    event.target.listener = true;
+    event.target.lister = true;
     
     // asigns section to toggleCommentSection(postId) return value
     let section = toggleCommentSection(postId);
