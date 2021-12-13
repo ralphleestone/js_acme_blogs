@@ -11,9 +11,14 @@ i. Return the created element.
 */
 
 function createElemWithText(elementName = "p", textContent = "", className = ""){
+    // deines and element and creatss the element based on the value passed to it
     let element = document.createElement(elementName);
+    // assigns element text content
     element.innerHTML = textContent;
+    // sets element class name
     element.className = className;
+
+    // returns element
     return element;
 }
 
@@ -30,17 +35,24 @@ i. Return an array of options elements
 */
 
 function createSelectOptions(users){
+    // checks if users exit. returns undefined if not
     if(!users) {
         return undefined;
     }
     const optionElements = users.map(user => {
-      const option = document.createElement('option');
-
-      option.value = user.id;
-      option.textContent = user.name;
-      return option;
+        
+        // creats option element
+        const option = document.createElement('option');
+        
+        // assigns option value to user id
+        option.value = user.id;
+        
+        // assings options text content to user name
+        option.textContent = user.name;
+        return option;
     });
 
+    // returns option elements
     return optionElements;
 }
 
@@ -58,14 +70,24 @@ f. Return the section element
 
 // toggleCommentSection
 function toggleCommentSection(postId) {
+    
+    // checks if users exit. returns undefined if not
     if(!postId){return undefined;}
+
+    // selects section element with data-post-id attribute equal to the postId
     let section = document.querySelector(`section[data-post-id="${postId}"]`);
+    
+    // if section exist
     if (section) {
+
+        // toggle hide classList
         section.classList.toggle('hide');
     }
+
+    // returns section
     return section;
 }
-
+// test toggleCommentSection function
 toggleCommentSection(1);
 toggleCommentSection(2);
 
@@ -82,15 +104,21 @@ f. Return the button element
 */
 
 function toggleCommentButton(postId){
+    
+    // checks if users exit. returns undefined if not
     if(postId == undefined){
         return undefined;
     }
-
+    
+    // selects button elment with data-post-id attribute equal to the postId
     const selectedButton = document.querySelector(`button[data-post-id = "${postId}"`);
 
+    // not = to null
     if(selectedButton != null){
         (selectedButton.textContent === 'Show Comments') ? selectedButton.textContent = 'Hide Comments' : selectedButton.textContent = 'Show Comments';
     }
+
+    // returns selectedButton
     return selectedButton;
 }
 
@@ -104,12 +132,23 @@ f. Return the parentElement
 */
 
 function deleteChildElements(parentElement){
+    // checks if elment exists
     if(!parentElement?.tagName) return;
+    
+    // assigns child to parentElement.lastElementChild
     let child = parentElement.lastElementChild;
+    
+    // while child exist
     while(child){
+
+        // remove child from parentElement
         parentElement.removeChild(child);
+
+        // reassign child to parentElement.lastElementChild
         child = parentElement.lastElementChild;
     }
+
+    // returns parentElement
     return parentElement;
 }
 
@@ -129,16 +168,32 @@ waiting on the logic inside the toggleComments function until we get there.
 */
 
 function addButtonListeners(){
+
+    // selects main element
     let mainElem = document.querySelector('main');
+    
+    // select all button elements
     let buttons = mainElem.querySelectorAll('button');
+    
+    // if exist
     if(buttons){
+        
+        // loops
         for(let i = 0; i < buttons.length; i++){
+            // sets button to button[index]
             let button = buttons[i];
+            
+            // asigns postId to button.postId
             let postId = button.dataset.postId;
+            
+            // adds event listener
             button.addEventListener('click', function(event){
+                // passes values to toggleComments function
                 toggleComments(event, postId), false
             });
         }
+
+        // returns buttons
         return buttons;
     }
 }
@@ -154,16 +209,32 @@ f. Return the button elements which were selected
 */
 
 function removeButtonListeners(){
+
+    // selects main element
     let mainElem = document.querySelector('main');
+    
+    // selects buttons in main element
     let buttons = mainElem.querySelectorAll('button');
+    
+    // if exists
     if(buttons){
+        // loops through buttons
         for(let i = 0; i < buttons.length; i++){
+            
+            // assigns button to buttons[index]
             let button = buttons[i];
+            
+            // assigns postId to button.dataset.postId
             let postId = button.dataset.postId;
+            
+            // removes event listener
             button.removeEventListener('click', function(event){
+                
+                // passes values to toggleComments function
                 toggleComments(event, postId), false
             });
         }
+        // returns buttons
         return buttons;
     }
 }
@@ -185,19 +256,34 @@ l. Return the fragment element
 */
 
 function createComments(comment){
-if(!comment) return;
+    
+    // checks if exist else returns
+    if(!comment) return;
+    
+    // creates fragment
+    let fragment = document.createDocumentFragment();
+    
+    for(let i = 0; i < comment.length; i++){
 
-let fragment = document.createDocumentFragment();
+        // creates arrticle element
+        let article = document.createElement("article");
+        
+        // creates h3 element
+        let h3 = createElemWithText('h3', comment.name);
+        
+        // creates p element
+        let p1 = createElemWithText('p', comment.body);
+        
+        // creates p element
+        let p2 = createElemWithText('p', `From:${comment.email}`);
+        
+        // appends created elements to article element
+        article.append(h3,p1,p2);
 
-for(let i = 0; i < comment.length; i++){
-    let article = document.createElement("article");
-    let h3 = createElemWithText('h3', comment.name);
-    let p1 = createElemWithText('p', comment.body);
-    let p2 = createElemWithText('p', `From:${comment.email}`);
-    article.append(h3,p1,p2);
-    fragment.append(article);
-}
-return fragment;
+        // appends article element to fragment
+        fragment.append(article);
+    }
+    return fragment;
 }
 
 /* 
@@ -212,17 +298,30 @@ g. Return the selectMenu element
 */
 
 function populateSelectMenu(users) {
-        if (!users) {
-          return undefined;
-        }
-        let selectMenu = document.getElementById("selectMenu");
-        let options = createSelectOptions(users);
+    
+    // checks if exist else returns undefined
+    if (!users) {return undefined;}
+    
+    // selects selectMenu element
+    let selectMenu = document.getElementById("selectMenu");
+        
+    // creats options
+    let options = createSelectOptions(users);
         for (let i = 0; i < options.length; i++) {
-          const o = options[i];
-          let option = document.createElement("option");
-          option.innerText = o;
-          selectMenu.appendChild(option);
+            
+            // assigns o to option[index];
+            const o = options[i];
+            
+            // creates option element
+            let option = document.createElement("option");
+            
+            // assigns option text to o
+            option.innerText = o;
+            
+            // appnds option to selectMenu
+            selectMenu.appendChild(option);
         }
+        // returns selectMenu
         return selectMenu;
     }
 
@@ -238,10 +337,18 @@ f. Return the JSON data
 
 async function getUsers(){
     try{
+
+        // fetch users
         const response = await fetch('https://jsonplaceholder.typicode.com/users');
+        
+        // to json
         const users = await response.json();
+        
+        // returns users
         return users;
     }catch(err){
+        
+        // writes error to console
         console.error(err);
     }
 }
@@ -258,11 +365,20 @@ g. Return the JSON data
 */
 
 async function getUserPosts(userId){
+    
+    // checks if userId is undefined else returns
     if(!userId) return;
+    
     try{
+        // fetch post with userid
         const response = await fetch('https://jsonplaceholder.typicode.com/posts?userId=${userId}');
+        
+        // returns responds
         return await response.json();
+
     }catch(err){
+
+        // prints error to console
         console.error(err);
     }
 }
@@ -279,13 +395,21 @@ g. Return the JSON data
 */
 
 async function getUser(userId){
+    // checks if there is a postid else returns
     if(!userId) return;
 
     try{
+        // fetch comments with postid
         const response = await fetch('https://jsonplaceholder.typicode.com/users?userId=${userId}');
+        
+        // jsonPostComments to reponse
         const jsonUserIdData = await response.json();
+        
+        // returns jsonPostComments
         return jsonUserIdData;
     }catch(err){
+
+        // prints error to console
         console.error(err);
     }
 }
@@ -302,13 +426,21 @@ g. Return the JSON data
 */
 
 async function getPostComments(postId){
+    // checks if there is a postid else returns
     if(!postId) return;
 
     try{
+        // fetch comments with postid
         const response = await fetch('https://jsonplaceholder.typicode.com/comments?postId=${postId}');
+        
+        // jsonPostComments to reponse
         const jsonPostComments = await response.json();
+        
+        // returns jsonPostComments
         return jsonPostComments;
     }catch(err){
+        
+        // prints error to console
         console.error(err);
     }
 }
@@ -328,14 +460,29 @@ j. Return the section element
 */
 
 async function displayComments(postId){
+    
+    // checks postId passed else return
     if(!postId) {return;}
-
+    
+    // creates section element
     let section = document.createElement("section");
+    
+    // assigns section.dataset.postId to postId
     section.dataset.postId = postId;
+    
+    // adds comments and hide to class list
     section.classList.add('comments','hide');
+    
+    // gets comments based on postId
     const comments = await getPostComments(postId);
+    
+    // creates fragment
     const fragment = createComments(comments);
+    
+    // appends fragment to section element
     section.append(fragment);
+    
+    // returns section
     return section;
 }
 
@@ -366,32 +513,55 @@ t. Return the fragment element
 */
 
 async function createPosts (jsonPosts){
+    
+    // checks if jsonPosts else return
     if(!jsonPosts) return;
 
+    // creates fragment
     let fragment = document.createDocumentFragment();
 
     for(let i = 0; i < jsonPosts.length; i++){
+        
+        // assigns post to jsonPosts[index]
         let post = jsonPosts[i];
 
+        // creates article element
         let article = document.createElement("article");
+        
+        // assisns section to displayComments return value
         let section = await displayComments(post.id);
+        
+        // assisns section to getusers return value
         let author = await getUser(post.userId);
 
+        // creates h2 element
         let h2 = createElemWithText("h2", post.title);
+        
+        // creates p element
         let p = createElemWithText("p", post.body);
+        
+        // creates p element
         let p2 = createElemWithText("p", `Post ID: ${post.id}`);
 
+        // creates p element
         let p3 = createElemWithText("p",`Author: ${author.name} with ${author.company.name}`);
+        
+        // creates p element
         let p4 = createElemWithText("p",'${author.company.catchPhrase}');
 
+        // creates button element
         let button = createElemWithText("button", "Show Comments");
+        
+        // assigns button.dataset.postId to post id
         button.dataset.postId = post.id;
 
+        // appends created elements to article element
         article.append(h2,p,p2, p3,p4,button,section);
 
+        // appends article to fragment
         fragment.append(article)
     }
-    console.log(fragment);
+    // returns fragment
     return fragment;
 }
 
@@ -410,9 +580,16 @@ g. Returns the element variable
 */
 
 async function displayPosts(posts){
+    
+    // selects main element
     let myMain = document.querySelector("main");
+    
     let element = (posts) ? await createPosts(posts) : document.querySelector("main p");
+    
+    // appends element to myMain
     myMain.append(element);
+    
+    // returns element
     return element;
 }
 
@@ -432,12 +609,20 @@ toggleCommentButton: [section, button]
 */
 
 function toggleComments(event, postId){
-    if(event || !postId){
-        return undefined;
-    }
+    
+    // checks if event or postid passed else returns undefined
+    if(event || !postId){return undefined;}
+    
+    // asigns event target listener to true
     event.target.listener = true;
+    
+    // asigns section to toggleCommentSection(postId) return value
     let section = toggleCommentSection(postId);
+
+    // asigns section to toggleCommentSection(postId) return value
     let button = toggleCommentButton(postId);
+    
+    // returns array with toggleCommentSection and toggleCommentButton retuned values
     return[section, button];
 }
 
@@ -459,13 +644,23 @@ fragment, addButtons]
 */
 
 async function refreshPosts(posts){
-    if (!posts){
-        return undefined;
-    }
+    
+    // checks if posts is passed else returns undefined
+    if (!posts){return undefined;}
+    
+    // removeButtons = removeButtonListeners function
     let removeButtons = removeButtonListeners();
+    
+    // selects main
     let main = deleteChildElements(document.querySelector("main"));
+    
+    // assigns fragment to displayPosts(posts) return value;
     let fragment = await displayPosts(posts);
+    
+    // // removeButtons = removeButtonListeners function
     let addButtons = addButtonListeners();
+    
+    // returns array of removeButtons, main, fragment, addButtons
     return [removeButtons, main, fragment, addButtons];
 }
 
@@ -484,8 +679,14 @@ i. Return an array with the userId, posts and the array returned from refreshPos
 
 async function selectMenuChangeEventHandler(e){
     let userId = e?.target?.value || 1;
+    
+    // gets posts based on userId
     let posts = await getUserPosts(userId);
-    let refreshPostsArray = await  refreshPosts(posts);
+    
+    // refrshes posts
+    let refreshPostsArray = await refreshPosts(posts);
+    
+    // returns userId, posts, refreshPostsArray 
     return [userId, posts, refreshPostsArray];
 }
 
@@ -502,8 +703,14 @@ result from populateSelectMenu: [users, select]
 */
 
 async function initPage(){
+
+    // gets users
     let users = await getUsers();
+    
+    // fiils select
     let select = populateSelectMenu(users);
+    
+    // returns array of users and select
     return [users, select];
 }
 
@@ -520,8 +727,16 @@ However, I can only test if the initApp function exists. It does not return anyt
 */
 
 function initApp(){
+    
+    // init page
     initPage();
+    
+    // sets select to #selectMenu element
     let select = document.getElementById("#selectMenu");
+    
+    // add listener to select element
     select.addEventListener("change",selectMenuChangeEventHandler,false); 
 }
+
+// add event listener
 document.addEventListener("DOMContentLoaded",initApp,false);
