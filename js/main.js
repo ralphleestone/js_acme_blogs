@@ -734,7 +734,7 @@ function initApp(){
     initPage();
     
     // sets select to #selectMenu element
-    let select = document.getElementById("#selectMenu");
+    let select = document.querySelector('#selectMenu');
     
     // add listener to select element
     select.addEventListener("change",selectMenuChangeEventHandler,false); 
