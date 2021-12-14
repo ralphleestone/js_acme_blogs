@@ -14,7 +14,7 @@ function createElemWithText(elementName = "p", textContent = "", className = "")
     // deines and element and creatss the element based on the value passed to it
     let element = document.createElement(elementName);
     // assigns element text content
-    element.innerHTML = textContent;
+    element.textContent = textContent;
     // sets element class name
     element.className = className;
 
@@ -571,7 +571,7 @@ g. Returns the element variable
 async function displayPosts(posts){
     
     // selects main element
-    let myMain = document.querySelector("main");
+    let myMain = document.querySelector('main');
     
     let element = (posts) ? await createPosts(posts) : document.querySelector("main p");
     
@@ -641,7 +641,7 @@ async function refreshPosts(posts){
     let removeButtons = removeButtonListeners();
     
     // selects main
-    let main = deleteChildElements(document.querySelector("main"));
+    let main = deleteChildElements(document.querySelector('main'));
     
     // assigns fragment to displayPosts(posts) return value;
     let fragment = await displayPosts(posts);
@@ -702,7 +702,6 @@ async function initPage(){
     // returns array of users and select
     return [users, select];
 }
-
 
 /*
 a. Dependencies: initPage, selectMenuChangeEventHandler
