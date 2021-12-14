@@ -264,7 +264,7 @@ function createComments(comment){
     // creates fragment
     let fragment = document.createDocumentFragment();
     
-    for (const comment of fragment)
+    //for (const comment of fragment)
 
     for(let i = 0; i < comment.length; i++){
 
@@ -272,10 +272,10 @@ function createComments(comment){
         let article = document.createElement("article");
         
         // creates h3 element
-        let h3 = createElemWithText('h3', comment.name);
+        let h3 = createElemWithText('h3', comment[i].name);
         
         // creates p element
-        let p1 = createElemWithText('p', comment.body);
+        let p1 = createElemWithText('p', comment[i].body);
         
         // creates p element
         let p2 = createElemWithText('p', `From:${comment.email}`);
