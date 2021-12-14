@@ -264,6 +264,8 @@ function createComments(comment){
     // creates fragment
     let fragment = document.createDocumentFragment();
     
+    for (const comment of fragment)
+
     for(let i = 0; i < comment.length; i++){
 
         // creates arrticle element
