@@ -287,7 +287,7 @@ function createComments(comment){
     }
     return fragment;
 }
-
+console.log(fragment);
 /* 
 a. Depends on the createSelectOptions function we created
 b. Receives the users JSON data as a parameter
