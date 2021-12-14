@@ -287,6 +287,7 @@ function createComments(comment){
     }
     return fragment;
 }
+
 /* 
 a. Depends on the createSelectOptions function we created
 b. Receives the users JSON data as a parameter
@@ -530,16 +531,16 @@ async function createPosts (jsonPosts){
         let article = document.createElement("article");
         
         // assisns section to displayComments return value
-        let section = await displayComments(post[i].id);
+        let section = await displayComments(post.id);
         
         // assisns section to getusers return value
-        let author = await getUser(post[i].userId);
+        let author = await getUser(post.userId);
 
         // creates h2 element
-        let h2 = createElemWithText("h2", post[i].title);
+        let h2 = createElemWithText("h2", post.title);
         
         // creates p element
-        let p = createElemWithText("p", post[i].body);
+        let p = createElemWithText("p", post.body);
         
         // creates p element
         let p2 = createElemWithText("p", `Post ID: ${post.id}`);
