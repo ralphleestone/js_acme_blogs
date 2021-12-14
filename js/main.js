@@ -189,8 +189,7 @@ function addButtonListeners(){
             // adds event listener
             button.addEventListener('click', function(event){
                 // passes values to toggleComments function
-                toggleComments(event, postId), false
-            });
+                toggleComments(event, postId)}, false);
         }
 
         // returns buttons
