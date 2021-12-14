@@ -318,7 +318,7 @@ function populateSelectMenu(users) {
             let option = document.createElement("option");
             
             // assigns option text to o
-            option.innerText = o;
+            option[i].innerText = o;
             
             // appnds option to selectMenu
             selectMenu.appendChild(option);
