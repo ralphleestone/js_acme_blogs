@@ -193,10 +193,9 @@ function addButtonListeners(){
                 // passes values to toggleComments function
                 toggleComments(event, postId)}, false);
         }
-
-        // returns buttons
-        return buttons;
     }
+    // returns buttons
+    return buttons;
 }
 
 /*
@@ -230,13 +229,12 @@ function removeButtonListeners(){
             
             // removes event listener
             button.removeEventListener('click', function(event){
-                
                 // passes values to toggleComments function
                 toggleComments(event, postId)},false);
         }
-        // returns buttons
-        return buttons;
     }
+    // returns buttons
+    return buttons;
 }
 
 /*
@@ -262,12 +260,11 @@ function createComments(comment){
     
     // creates fragment
     let fragment = document.createDocumentFragment();
-    
-    //for (const comment of fragment)
 
     for(let i = 0; i < comment.length; i++){
-
-        // creates arrticle element
+        
+    //for (const value of comment){
+        // creates article element
         let article = document.createElement("article");
         
         // creates h3 element
@@ -277,7 +274,7 @@ function createComments(comment){
         let p1 = createElemWithText('p', comment[i].body);
         
         // creates p element
-        let p2 = createElemWithText('p', `From:${comment.email}`);
+        let p2 = createElemWithText('p', `From:${comment[i].email}`);
         
         // appends created elements to article element
         article.append(h3,p1,p2);
@@ -309,20 +306,12 @@ function populateSelectMenu(users) {
         
     // creats options
     let options = createSelectOptions(users);
+
+    if(options){
         for (let i = 0; i < options.length; i++) {
-            
-            // assigns o to option[index];
-            const o = options[i];
-            
-            // creates option element
-            let option = document.createElement("option");
-            
-            // assigns option text to o
-            option[i].innerText = o;
-            
-            // appnds option to selectMenu
-            selectMenu.appendChild(option);
-        }
+            // appends option to selectMenu
+            selectMenu.appendChild(options[i]);
+        }}
         // returns selectMenu
         return selectMenu;
     }
