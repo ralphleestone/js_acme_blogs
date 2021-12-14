@@ -262,8 +262,7 @@ function createComments(comment){
     let fragment = document.createDocumentFragment();
 
     for(let i = 0; i < comment.length; i++){
-        
-    //for (const value of comment){
+    
         // creates article element
         let article = document.createElement("article");
         
@@ -274,7 +273,7 @@ function createComments(comment){
         let p1 = createElemWithText('p', comment[i].body);
         
         // creates p element
-        let p2 = createElemWithText('p', `From:${comment[i].email}`);
+        let p2 = createElemWithText('p', `From: ${comment[i].email}`);
         
         // appends created elements to article element
         article.append(h3,p1,p2);
@@ -358,7 +357,7 @@ g. Return the JSON data
 async function getUserPosts(userId){
     
     // checks if userId is undefined else returns
-    if(!userId) return;
+    if(!userId){return};
     
     try{
         // fetch post with userid
@@ -373,7 +372,6 @@ async function getUserPosts(userId){
         console.error(err);
     }
 }
-
 /*
 a. Receives a user id as a parameter
 b. Fetches data for a specific user id from: https://jsonplaceholder.typicode.com/
