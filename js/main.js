@@ -232,8 +232,7 @@ function removeButtonListeners(){
             button.removeEventListener('click', function(event){
                 
                 // passes values to toggleComments function
-                toggleComments(event, postId), false
-            });
+                toggleComments(event, postId)},false);
         }
         // returns buttons
         return buttons;
@@ -272,10 +271,10 @@ function createComments(comment){
         let article = document.createElement("article");
         
         // creates h3 element
-        let h3 = createElemWithText('h3', comment[i]);
+        let h3 = createElemWithText('h3', comment[i].name);
         
         // creates p element
-        let p1 = createElemWithText('p', comment[i]);
+        let p1 = createElemWithText('p', comment[i].body);
         
         // creates p element
         let p2 = createElemWithText('p', `From:${comment.email}`);
