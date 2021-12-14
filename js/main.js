@@ -272,10 +272,10 @@ function createComments(comment){
         let article = document.createElement("article");
         
         // creates h3 element
-        let h3 = createElemWithText('h3', comment[i].name);
+        let h3 = createElemWithText('h3', comment[i]);
         
         // creates p element
-        let p1 = createElemWithText('p', comment[i].body);
+        let p1 = createElemWithText('p', comment[i]);
         
         // creates p element
         let p2 = createElemWithText('p', `From:${comment.email}`);
